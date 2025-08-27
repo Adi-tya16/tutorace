@@ -1,20 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Search, Star, Users, Clock } from "lucide-react";
-import heroImage from "@/assets/hero-image.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[80vh] flex items-center">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Students and tutors learning together"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
-      </div>
-
+    <section className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-background via-background to-muted/20">
       <div className="container relative z-10">
         <div className="max-w-2xl space-y-8">
           <div className="space-y-4">

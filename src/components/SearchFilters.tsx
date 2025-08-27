@@ -9,7 +9,7 @@ const SearchFilters = () => {
   const priceRanges = ["$10-25/hr", "$25-50/hr", "$50-75/hr", "$75+/hr"];
 
   return (
-    <div className="bg-muted/50 border-b">
+    <div className="bg-muted/20 border-b border-border/50">
       <div className="container py-6">
         <div className="space-y-4">
           {/* Search Bar */}

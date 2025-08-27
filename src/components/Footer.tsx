@@ -2,7 +2,7 @@ import { BookOpen, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-muted border-t">
+    <footer className="bg-muted/20 border-t border-border/50">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
