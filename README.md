@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/bcc6b2ac-9215-41c0-9036-7a189ff590d6
+**URL**: [https://lovable.dev/projects/bcc6b2ac-9215-41c0-9036-7a189ff590d6](https://tutorace-link.lovable.app)
 
 
 ## What technologies are used for this project?
