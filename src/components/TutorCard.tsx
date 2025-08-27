@@ -2,6 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Clock, CheckCircle } from "lucide-react";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface TutorCardProps {
   name: string;
@@ -24,6 +29,48 @@ const TutorCard = ({
   experience,
   isOnline = false 
 }: TutorCardProps) => {
+  const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleBookSession = async () => {
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to book a session.",
+        variant: "destructive",
+      });
+      navigate("/auth");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: {
+          tutorName: name,
+          hourlyRate: hourlyRate,
+        },
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      toast({
+        title: "Payment Error",
+        description: "Failed to create payment session. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Card className="overflow-hidden card-shadow hover:card-shadow-hover transform hover:-translate-y-1 transition-smooth cursor-pointer">
       <div className="p-6 space-y-4">
@@ -83,8 +130,13 @@ const TutorCard = ({
               <Clock className="w-4 h-4 text-muted-foreground" />
               <span className="font-semibold text-lg">${hourlyRate}/hr</span>
             </div>
-            <Button size="sm" variant="hero">
-              Book Session
+            <Button 
+              size="sm" 
+              variant="hero" 
+              onClick={handleBookSession}
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Book Session"}
             </Button>
           </div>
         </div>

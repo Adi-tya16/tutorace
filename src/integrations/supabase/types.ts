@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string | null
+          id: string
+          session_type: string
+          status: string | null
+          stripe_session_id: string | null
+          tutor_name: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string | null
+          id?: string
+          session_type?: string
+          status?: string | null
+          stripe_session_id?: string | null
+          tutor_name: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string | null
+          id?: string
+          session_type?: string
+          status?: string | null
+          stripe_session_id?: string | null
+          tutor_name?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
