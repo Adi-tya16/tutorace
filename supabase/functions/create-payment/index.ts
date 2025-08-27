@@ -27,10 +27,15 @@ serve(async (req) => {
     const user = data.user;
     if (!user?.email) throw new Error("User not authenticated");
 
-    // Parse request body
+    // Parse request body with validation
     const { tutorName, hourlyRate } = await req.json();
-    if (!tutorName || !hourlyRate) {
-      throw new Error("Tutor name and hourly rate are required");
+    
+    // Validate inputs
+    if (!tutorName || typeof tutorName !== 'string' || tutorName.trim().length === 0) {
+      throw new Error("Valid tutor name is required");
+    }
+    if (!hourlyRate || typeof hourlyRate !== 'number' || hourlyRate <= 0 || hourlyRate > 1000) {
+      throw new Error("Valid hourly rate is required (between $1-$1000)");
     }
 
     // Initialize Stripe
@@ -63,8 +68,8 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/payment-cancel`,
+      success_url: `https://vdutbqrngozppbtjwiwq.supabase.co/functions/v1/redirect-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://vdutbqrngozppbtjwiwq.supabase.co/functions/v1/redirect-cancel`,
     });
 
     // Record booking in Supabase using service role key

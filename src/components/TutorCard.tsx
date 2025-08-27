@@ -57,8 +57,8 @@ const TutorCard = ({
       if (error) throw error;
 
       if (data?.url) {
-        // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
+        // Open Stripe checkout in a new tab with security parameters
+        window.open(data.url, '_blank', 'noopener,noreferrer');
       }
     } catch (error) {
       console.error('Payment error:', error);
