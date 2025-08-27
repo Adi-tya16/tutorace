@@ -17,8 +17,8 @@ Built with React (TypeScript + TSX), Supabase (auth + database), and Stripe (pay
 
 🚀 Setup & Installation
 1. Clone the Repository
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Adi-tya16/tutorace.git
+cd tutorace
 
 2. Install Dependencies
 npm install
