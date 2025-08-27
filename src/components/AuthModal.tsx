@@ -3,12 +3,27 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, Mail, Lock, User, GraduationCap } from "lucide-react";
+import { BookOpen, Mail, Lock, User, GraduationCap, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AuthModal = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md p-8 card-shadow">
+      <div className="relative w-full max-w-md">
+        {/* Back Button */}
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="absolute -top-16 left-0 text-muted-foreground hover:text-foreground" 
+          asChild
+        >
+          <Link to="/">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Home
+          </Link>
+        </Button>
+
+        <Card className="w-full p-8 card-shadow">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
             <BookOpen className="h-8 w-8 text-primary" />
@@ -104,6 +119,7 @@ const AuthModal = () => {
           </TabsContent>
         </Tabs>
       </Card>
+      </div>
     </div>
   );
 };
